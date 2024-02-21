@@ -1,0 +1,83 @@
+package programaciónIII;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
+import javax.swing.JFrame;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Display d=  new Display(); 
+	}
+
+}
+//JFrame Display
+package programaciónIII;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class Display extends JFrame {
+    JButton btnAcceder; 
+    JFrame d;
+    JLabel lblUsuario;
+    JLabel lblPassword;
+    JTextField txtUsuario;
+    JTextField txtPassword;
+
+    public Display() {
+        btnAcceder = new JButton("Acceder"); 
+        d = new JFrame();
+        d.setVisible(true);
+        d.setBounds(300, 300,800, 550);
+        d.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        d.setLayout(null);
+        d.setTitle("Ventana principal");
+
+        lblUsuario = new JLabel("Usuario:");
+        lblUsuario.setBounds(50, 20, 100, 30);
+        d.add(lblUsuario);
+
+        txtUsuario = new JTextField();
+        txtUsuario.setBounds(160, 20, 150, 30);
+        d.add(txtUsuario);
+
+        lblPassword = new JLabel("Contraseña:");
+        lblPassword.setBounds(50, 50, 100, 30);
+        d.add(lblPassword);
+
+        txtPassword = new JTextField();
+        txtPassword.setBounds(160, 50, 150, 30);
+        d.add(txtPassword);
+
+        btnAcceder.setBounds(50, 200, 300, 50); 
+        btnAcceder.setBackground(Color.white);
+        d.add(btnAcceder);
+
+        btnAcceder.addActionListener(new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e) {
+                
+                String usuario = txtUsuario.getText();
+                String password = txtPassword.getText();
+
+              //La contraseña es "contraseña y el usuario es "usurio"
+                if (usuario.equals("usuario") && password.equals("contraseña")) {
+                    System.out.println("Acceso permitido.");
+                } else {
+                    System.out.println("Acceso denegado.");
+                }
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        new Display();
+    }
+}
