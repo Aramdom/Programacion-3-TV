@@ -1,0 +1,105 @@
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Ventana ventana = new Ventana();
+	}
+
+} 
+
+
+
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Font;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+public class Ventana extends JFrame {
+    
+    JLabel lblPassword;
+	JTextField txtUsuario;
+    JTextField txtPassword;
+
+		
+
+		public Ventana () {
+			setVisible(true);
+			setSize(1000,500);
+			setLocation(100,100);
+			setLocationRelativeTo(null);
+			setResizable(true);
+			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			
+			setTitle("Mi ventana");
+			
+			setMinimumSize(new Dimension(200,200));
+			setMaximumSize(new Dimension(1000,750));
+			
+			this.setLayout(null);
+			inicioComponentes();
+			
+			
+		}
+		
+		public void inicioComponentes() {
+			
+			JPanel login = new JPanel();
+			login.setSize(this.getWidth()/2,this.getHeight());
+			login.setBackground(Color.decode("#B93E23"));
+			
+			JLabel login_tag = new JLabel("Bienvenido al sistema",0);
+			login_tag.setSize(300,80);
+			login_tag.setFont(new Font ("bradLey Hand", Font.BOLD, 40));
+			login_tag.setForeground(Color.black);
+			login_tag.setLocation(100,20);
+			login_tag.setOpaque(true);
+			login_tag.setBackground(Color.white);
+			login.add(login_tag);
+			
+			JPanel registro = new JPanel();
+			registro.setSize(this.getWidth()/2,this.getHeight());
+			registro.setLocation(500,0);
+			registro.setBackground(Color.decode("#834B46"));
+			
+			JLabel registro_tag=new JLabel("Registro",0);
+			registro_tag.setSize(80,300);
+			registro.setFont(new Font("bradLey Hand", Font.BOLD, 40));
+			registro_tag.setLocation(100,20);
+			registro_tag.setOpaque(true);
+			registro_tag.setForeground(Color.black);
+			registro.add(registro_tag);
+
+
+			
+		
+			JLabel title= new JLabel("Hola Mundo ", SwingConstants.CENTER);
+			title.setFont(new Font("Arial", Font.PLAIN, 24));
+			title.setFont(new Font("Arial", Font.PLAIN, 24));
+			
+			JLabel lblUsuario; 
+			lblUsuario = new JLabel("Usuario:");
+	        lblUsuario.setSize(300, 200);
+	        lblUsuario.setLocation(190,270);
+	        login.add(lblUsuario);
+	        
+			
+			
+			 
+			
+this.add(login);
+			this.add(registro);
+			
+			
+		}
+}
