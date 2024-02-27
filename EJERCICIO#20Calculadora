@@ -1,0 +1,64 @@
+package programaciónIII;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
+import javax.swing.JFrame;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Display d=  new Display(); 
+	}
+
+}
+
+//Clase Display
+package programaciónIII;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class Display extends JFrame {
+
+    public Display() {
+        setTitle("Calculadora");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(300, 400);
+        setLocationRelativeTo(null);
+
+        JPanel panelPrincipal = new JPanel();
+        panelPrincipal.setLayout(new BorderLayout());
+
+        JPanel panelDisplay = new JPanel();
+        JTextField display = new JTextField(10);
+        panelDisplay.add(display);
+
+        JPanel panelBotones = new JPanel();
+        panelBotones.setLayout(new GridLayout(4, 4, 5, 5));
+
+        String[] botones = {
+                "7", "8", "9", "/",
+                "4", "5", "6", "*",
+                "1", "2", "3", "-",
+                "0", ".", "=", "+"
+        };
+
+        for (String boton : botones) {
+            JButton btn = new JButton(boton);
+            panelBotones.add(btn);
+        }
+
+        panelPrincipal.add(panelDisplay, BorderLayout.NORTH);
+        panelPrincipal.add(panelBotones, BorderLayout.CENTER);
+
+        add(panelPrincipal);
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new Display();
+        });
+    }
+}
