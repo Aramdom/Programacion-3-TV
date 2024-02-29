@@ -1,0 +1,153 @@
+package programaciónIII;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+
+import javax.swing.JFrame;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Display d=  new Display(); 
+	}
+
+}
+
+//Clase Display
+package programaciónIII;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
+
+import javax.imageio.ImageIO;
+
+public class Display extends JFrame {
+    JButton btnAcceder; 
+    JFrame d;
+    JLabel lblUsuario;
+    JLabel lblPassword;
+    JTextField txtUsuario;
+    JTextField txtPassword;
+    JLabel lblImagen;
+    JLabel titulo;
+    JLabel region;
+    JComboBox<String> comboBoxPaises;
+    JButton btnregistro;
+    JLabel registro;
+    
+
+    public Display() {
+        btnAcceder = new JButton("Acceder"); 
+        btnregistro = new JButton("Registrarse");
+        d = new JFrame();
+        d.setVisible(true);
+        d.setBounds(300, 300, 800, 550);
+        d.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        d.setLayout(null);
+        d.setTitle("Ventana principal");
+
+        titulo = new JLabel("Bienvenido al sistema");
+        titulo.setFont(new Font("Arial", Font.BOLD, 35)); 
+        titulo.setBounds(200, 100, 400, 50); 
+        titulo.setHorizontalAlignment(SwingConstants.CENTER); 
+        titulo.setOpaque(true);
+        d.add(titulo);
+        
+        lblUsuario = new JLabel("USUARIO");
+        lblUsuario.setBounds(160, 165, 100, 30); 
+        lblUsuario.setFont(new Font("Arial", Font.BOLD, 13)); 
+        d.add(lblUsuario);
+        
+
+        txtUsuario = new JTextField();
+        txtUsuario.setBounds(160, 200, 250, 30); 
+        d.add(txtUsuario);
+
+        lblPassword = new JLabel("CONTRASEÑA");
+        lblPassword.setBounds(160, 235, 100, 30); 
+        lblPassword.setFont(new Font("Arial", Font.BOLD, 13)); 
+        d.add(lblPassword);
+
+        txtPassword = new JTextField();
+        txtPassword.setBounds(160, 270, 250, 30); 
+        d.add(txtPassword);
+
+        btnAcceder.setBounds(130, 320, 300, 50); 
+        btnAcceder.setBackground(Color.white);
+        d.add(btnAcceder);
+        
+        registro=new JLabel("¿Aún no tienes un usuario?");
+        registro.setBounds(185, 360, 300, 50); 
+        registro.setFont(new Font("Arial", Font.BOLD, 15)); 
+        d.add(registro);
+        
+        btnregistro.setBounds(180, 400, 300, 50); 
+        btnregistro.setBackground(Color.yellow);
+        btnregistro.setSize(200,30);
+        d.add(btnregistro);
+        
+        region = new JLabel("Región");
+        region.setFont(new Font("Arial", Font.BOLD, 20)); 
+        region.setBounds(d.getWidth() - 125, 10, 120, 30);
+        d.add(region);
+        
+        
+        
+        String[] paises = {"México", "Estados Unidos", "Canada"}; 
+        comboBoxPaises = new JComboBox<>(paises);
+        comboBoxPaises.setBounds(d.getWidth()  - 150, 40, 120, 30); 
+        d.add(comboBoxPaises);
+        
+        
+        
+        
+        // JLabel para la imagen y establecer su ubicacn y tamaño
+        lblImagen = new JLabel();
+        lblImagen.setBounds(0, 0, d.getWidth(), d.getHeight());
+        d.add(lblImagen);
+
+        
+        
+        
+
+        try {
+            URL url = getClass().getResource("fondo.png");
+            BufferedImage img = ImageIO.read(url);
+            Image imgScaled = img.getScaledInstance(d.getWidth(), d.getHeight(), Image.SCALE_SMOOTH);
+            lblImagen.setIcon(new ImageIcon(imgScaled));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        
+       
+
+        btnAcceder.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String usuario = txtUsuario.getText();
+                String password = txtPassword.getText();
+
+                // La contraseña es "contraseña" y el usuario es "usurio"
+                if (usuario.equals("usuario") && password.equals("contraseña")) {
+                    System.out.println("Acceso permitido.");
+                } else {
+                    System.out.println("Acceso denegado.");
+                }
+            }
+        });
+        this.repaint();
+        this.revalidate();
+        d.repaint();
+    
+    }
+
+    public static void main(String[] args) {
+        new Display();
+    }
+}
+
