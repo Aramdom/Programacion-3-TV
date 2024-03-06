@@ -1,0 +1,244 @@
+package programaciónIII;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
+
+public class Display extends JFrame {
+    JButton btnAcceder; 
+    JButton btnRegistro;
+    JFrame d;
+    JLabel lblNombre;
+    JLabel lblApellidoPaterno;
+    JLabel lblApellidoMaterno;
+    JLabel lblFechaNacimiento;
+    JLabel lblGenero;
+    JTextField txtNombre;
+    JTextField txtApellidoPaterno;
+    JTextField txtApellidoMaterno;
+    JTextField txtFechaNacimiento;
+    JRadioButton rbMasculino;
+    JRadioButton rbFemenino;
+    ButtonGroup grupoGenero;
+    JLabel lblImagen;
+    JLabel titulo;
+    JLabel nacionalidad;
+    JComboBox<String> comboBoxPaises;
+    JPanel panelFotoPerfil;
+    JLabel lblFotoPerfil;
+    JCheckBox chkMostrarFotoPerfil;
+    JLabel gustos;
+    JComboBox<String> comboBoxGustos;
+    JLabel Descripcion;
+    JComboBox<String> comboBoxDescrip;
+
+    public Display() {
+        btnAcceder = new JButton("Acceder"); 
+        btnRegistro = new JButton("Registrarse");
+        d = new JFrame();
+        d.setVisible(true);
+        d.setBounds(300, 260, 800, 600);
+        d.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        d.setLayout(null);
+        d.setTitle("Ventana principal");
+
+        titulo = new JLabel("Bienvenido al sistema");
+        titulo.setFont(new Font("Arial", Font.BOLD, 35)); 
+        titulo.setBounds(200, 100, 400, 50); 
+        titulo.setHorizontalAlignment(SwingConstants.CENTER); 
+        titulo.setOpaque(true);
+        d.add(titulo);
+        
+       
+        
+        panelFotoPerfil = new JPanel();
+        panelFotoPerfil.setBounds(450, 165, 250, 250);
+        panelFotoPerfil.setLayout(new BorderLayout());
+        panelFotoPerfil.setBorder(BorderFactory.createTitledBorder("Foto de Perfil"));
+        d.add(panelFotoPerfil);
+        
+        lblFotoPerfil = new JLabel();
+        panelFotoPerfil.add(lblFotoPerfil, BorderLayout.CENTER);
+        
+        chkMostrarFotoPerfil = new JCheckBox("Mostrar Foto de Perfil");
+        chkMostrarFotoPerfil.setSelected(true); 
+        panelFotoPerfil.add(chkMostrarFotoPerfil, BorderLayout.SOUTH);
+        
+        
+        chkMostrarFotoPerfil.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (chkMostrarFotoPerfil.isSelected()) {
+                    lblFotoPerfil.setVisible(true);
+                } else {
+                    lblFotoPerfil.setVisible(false);
+                }
+            }
+        });
+       
+        lblNombre = new JLabel("Nombre:");
+        lblNombre.setBounds(160, 165, 100, 30); 
+        lblNombre.setFont(new Font("Arial", Font.BOLD, 13)); 
+        d.add(lblNombre);
+
+        txtNombre = new JTextField();
+        txtNombre.setBounds(160, 200, 250, 30); 
+        d.add(txtNombre);
+        
+        lblApellidoPaterno = new JLabel("Apellido Paterno:");
+        lblApellidoPaterno.setBounds(160, 235, 120, 30); 
+        lblApellidoPaterno.setFont(new Font("Arial", Font.BOLD, 13)); 
+        d.add(lblApellidoPaterno);
+
+        txtApellidoPaterno = new JTextField();
+        txtApellidoPaterno.setBounds(160, 270, 250, 30); 
+        d.add(txtApellidoPaterno);
+        
+        lblApellidoMaterno = new JLabel("Apellido Materno:");
+        lblApellidoMaterno.setBounds(160, 305, 120, 30); 
+        lblApellidoMaterno.setFont(new Font("Arial", Font.BOLD, 13)); 
+        d.add(lblApellidoMaterno);
+
+        txtApellidoMaterno = new JTextField();
+        txtApellidoMaterno.setBounds(160, 340, 250, 30); 
+        d.add(txtApellidoMaterno);
+        
+        lblFechaNacimiento = new JLabel("Fecha de Nacimiento:");
+        lblFechaNacimiento.setBounds(160, 375, 150, 30); 
+        lblFechaNacimiento.setFont(new Font("Arial", Font.BOLD, 13)); 
+        d.add(lblFechaNacimiento);
+
+        txtFechaNacimiento = new JTextField();
+        txtFechaNacimiento.setBounds(160, 410, 250, 30); 
+        d.add(txtFechaNacimiento);
+        
+        lblGenero = new JLabel("Género:");
+        lblGenero.setBounds(160, 445, 80, 30); 
+        lblGenero.setFont(new Font("Arial", Font.BOLD, 13)); 
+        d.add(lblGenero);
+        
+        rbMasculino = new JRadioButton("Masculino");
+        rbMasculino.setBounds(160, 480, 100, 30); 
+        d.add(rbMasculino);
+        
+        rbFemenino = new JRadioButton("Femenino");
+        rbFemenino.setBounds(260, 480, 100, 30); 
+        d.add(rbFemenino);
+        
+        grupoGenero = new ButtonGroup();
+        grupoGenero.add(rbMasculino);
+        grupoGenero.add(rbFemenino);
+
+        
+        btnRegistro.setBounds(180, 520, 150, 30); 
+        btnRegistro.setBackground(Color.yellow);
+        d.add(btnRegistro);
+        
+        nacionalidad = new JLabel("Región:");
+        nacionalidad.setFont(new Font("Arial", Font.BOLD, 12)); 
+        nacionalidad.setBounds(d.getWidth() - 125, 10, 120, 30);
+        d.add(nacionalidad);
+        
+        String[] paises = {"México", "Estados Unidos", "Canadá"}; 
+        comboBoxPaises = new JComboBox<>(paises);
+        comboBoxPaises.setBounds(d.getWidth()  - 150, 40, 120, 30); 
+        d.add(comboBoxPaises);
+        
+        
+        
+        Descripcion=new JLabel ("Descripción:");
+        Descripcion.setFont(new Font("Arial", Font.BOLD, 18)); 
+        Descripcion.setBounds(430, 470, 280, 20);
+        d.add(Descripcion);
+        
+        
+        
+        gustos=new JLabel ("Gustos:");
+        gustos.setFont(new Font("Arial", Font.BOLD, 20)); 
+        gustos.setBounds(600, 470, 280, 20);
+        
+        d.add(gustos);
+        String[] gustos = {"Haccer deporte", "Escuchar musica", "bailar", "cantar"}; 
+        comboBoxGustos = new JComboBox<>(gustos);
+        comboBoxGustos.setBounds(d.getWidth()  - 210, 495, 100, 20); 
+        d.add(comboBoxGustos);
+        
+        String[] Descripcion = {"Soy Amistoso", "Soy Enjoón", "Soy serio", "Soy Valiente"}; 
+        comboBoxDescrip = new JComboBox<>(Descripcion);
+        comboBoxDescrip.setBounds(d.getWidth()  - 365, 495, 100, 20); 
+        d.add(comboBoxDescrip);
+        
+        
+        
+        lblImagen = new JLabel();
+        lblImagen.setBounds(0, 0, d.getWidth(), d.getHeight());
+        d.add(lblImagen);
+
+        try {
+            URL url = getClass().getResource("fondo.png");
+            BufferedImage img = ImageIO.read(url);
+            Image imgScaled = img.getScaledInstance(d.getWidth(), d.getHeight(), Image.SCALE_SMOOTH);
+            lblImagen.setIcon(new ImageIcon(imgScaled));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        btnAcceder.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                
+                String nombre = txtNombre.getText();
+                String apellidoPaterno = txtApellidoPaterno.getText();
+                String apellidoMaterno = txtApellidoMaterno.getText();
+                String fechaNacimiento = txtFechaNacimiento.getText();
+                String genero = "";
+                if (rbMasculino.isSelected()) {
+                    genero = "Masculino";
+                } else if (rbFemenino.isSelected()) {
+                    genero = "Femenino";
+                }
+                String nacionalidad = (String) comboBoxPaises.getSelectedItem();
+                
+               
+                System.out.println("Nombre: " + nombre);
+                System.out.println("Apellido Paterno: " + apellidoPaterno);
+                System.out.println("Apellido Materno: " + apellidoMaterno);
+                System.out.println("Fecha de Nacimiento: " + fechaNacimiento);
+                System.out.println("Género: " + genero);
+                System.out.println("Nacionalidad: " + nacionalidad);
+            }
+        });
+
+        btnRegistro.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                
+                System.out.println("Abriendo ventana de registro...");
+            }
+        });
+
+        try {
+            URL url = getClass().getResource("Icono de usuario.png"); 
+            BufferedImage img = ImageIO.read(url);
+            ImageIcon icono = new ImageIcon(img);
+
+           
+            Image imgScaled = icono.getImage().getScaledInstance(panelFotoPerfil.getWidth(), panelFotoPerfil.getHeight(), Image.SCALE_SMOOTH);
+            ImageIcon iconoEscalado = new ImageIcon(imgScaled);
+
+           
+            lblFotoPerfil.setIcon(iconoEscalado);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.repaint();
+        this.revalidate();
+        d.repaint();
+    }
+
+    public static void main(String[] args) {
+        new Display();
+    }
+}
