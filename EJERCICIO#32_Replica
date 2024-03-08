@@ -1,0 +1,96 @@
+package Tareas;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
+
+public class Triangulo extends JPanel {
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        Color colorMelon = new Color(251, 105, 100);
+        Color colorMelonOscuro = colorMelon.darker();
+        Color colorAzul = new Color(100, 149, 237);
+        Color colorCafe = new Color(139, 69, 19);
+        Color colorCilindro = new Color(0, 128, 0); // Verde
+
+        int width = getWidth();
+        int height = getHeight();
+
+        g.setColor(Color.BLACK);
+        g.drawRect(0, height / 2, width - 1, height / 2 - 1);
+        g.setColor(colorMelon);
+        g.fillRect(1, height / 2 + 1, width - 2, height / 2 - 2);
+
+        g.setColor(Color.BLACK);
+        g.drawRect(0, height / 2 + 20, width - 1, height / 2 - 20 - 1);
+        g.setColor(colorCafe);
+        g.fillRect(1, height / 2 + 21, width - 2, height / 2 - 21 - 1);
+
+        g.setColor(Color.BLACK);
+        for (int i = 0; i < width; i += 20) {
+            for (int j = height / 2 + 20; j < height; j += 20) {
+                g.drawRect(i, j, 17, 17);
+            }
+        }
+
+        g.setColor(Color.BLACK);
+        g.drawRect(60, height / 2 - 50, 100 - 1, 50 - 1); 
+        g.setColor(colorMelonOscuro);
+        g.fillRect(61, height / 2 - 49, 100 - 2, 50 - 2); 
+
+        g.setColor(Color.BLACK);
+        g.drawRect(160, height / 2 - 90, 90 - 1, 90 - 1); 
+        g.setColor(colorAzul);
+        g.fillRect(161, height / 2 - 89, 90 - 2, 90 - 2); 
+
+        g.setColor(Color.BLACK);
+        g.fillOval(60, height / 2 - 50, 10, 10);
+        g.fillOval(150, height / 2 - 50, 10, 10);
+        g.fillOval(160, height / 2 - 90, 10, 10);
+        g.fillOval(237, height / 2 - 90, 10, 10);
+        g.fillOval(160, height / 2 - 90, 10, 10);
+        g.fillOval(237, height / 2 - 10, 10, 10);
+        g.fillOval(160, height / 2 - 10, 10, 10);
+        g.fillOval(60, height / 2 - 10, 10, 10);
+        g.fillOval(150, height / 2 - 10, 10, 10);
+        
+        
+        g.setColor(Color.BLACK);
+        g.drawRect(325, height / 2 - 75, 39, 79); 
+        g.setColor(colorCilindro);
+        g.fillRect(326, height / 2 - 75, 38, 78); 
+
+        try {
+            URL url = getClass().getResource("Mario.png");
+            BufferedImage img = ImageIO.read(url);
+            Image imgScaled = img.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+            g.drawImage(imgScaled, 250, height / 2 - 50, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Ventana");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+
+        Triangulo panel = new Triangulo();
+        frame.add(panel);
+
+        frame.setVisible(true);
+    }
+}
+
+
+
+
+
+
+
+
