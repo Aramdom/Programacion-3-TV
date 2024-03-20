@@ -3,92 +3,102 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Display d=  new Display(); 
-	}
+	    SwingUtilities.invokeLater(new Runnable() {
+	        @Override
+	        public void run() {
+	            new Display();
+	        }
+	    });
 
+	}
 }
 
 //clase display
 package programaciónIII;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.URL;
-import javax.imageio.ImageIO;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Display extends JFrame {
-    JButton btnAcceder;
-    JButton btnRegistro;
-    JFrame d;
     JPanel panel;
+    List<JButton> botonesGenerados;
 
     public Display() {
-        btnAcceder = new JButton("Acceder");
-        btnRegistro = new JButton("Registrarse");
-        d = new JFrame();
-        d.setVisible(true);
-        d.setBounds(300, 260, 800, 600);
-        d.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        d.setLayout(null);
-        d.setTitle("Ventana principal");
+        setTitle("Generador de Botones Aleatorios");
+        setSize(400, 400);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        panel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                
-                g.setColor(getBackground());
-                g.fillRect(0, 0, getWidth(), getHeight());
-            }
-        };
-        panel.setBounds(0, 0, d.getWidth(), d.getHeight());
-        panel.setBackground(Color.WHITE);
-        panel.addMouseListener(new MouseAdapter() {
+        panel = new JPanel();
+        panel.setLayout(null);
+        getContentPane().add(panel);
+
+        JLabel label = new JLabel("Click aquí");
+        label.setBounds(150, 150, 100, 30);
+        label.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                JButton boton = new JButton("Botón");
-                panel.add(boton);
-                boton.setBounds(e.getX(), e.getY(), 100, 30);
-                panel.revalidate();
-                panel.repaint();
+                generarBotonAleatorio();
             }
         });
-        d.add(panel);
+        panel.add(label);
 
-        btnRegistro.setBounds(180, 520, 150, 30);
-        btnRegistro.setBackground(Color.yellow);
-        d.add(btnRegistro);
-
-        btnRegistro.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-               
-            }
-        });
-
-        
-        d.addWindowListener(new WindowAdapter() {
+        JButton btnLimpiar = new JButton("Limpiar pantalla");
+        btnLimpiar.setBounds(120, 200, 160, 30);
+        btnLimpiar.addActionListener(new ActionListener() {
             @Override
-            public void windowClosed(WindowEvent e) {
-                super.windowClosed(e);
-                panel.setBackground(Color.LIGHT_GRAY); 
+            public void actionPerformed(ActionEvent e) {
+                limpiarPantalla();
             }
         });
+        panel.add(btnLimpiar);
+
+        botonesGenerados = new ArrayList<>();
+
+        setVisible(true);
+    }
+
+    private void generarBotonAleatorio() {
+        Random rand = new Random();
+        JButton boton = new JButton("Botón");
+        int x = rand.nextInt(panel.getWidth() - boton.getWidth());
+        int y = rand.nextInt(panel.getHeight() - boton.getHeight());
+        boton.setBounds(x, y, 80, 30);
+        boton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarCoordenadas(boton.getX(), boton.getY());
+            }
+        });
+        botonesGenerados.add(boton);
+        panel.add(boton);
+        panel.repaint();
+    }
+
+    private void limpiarPantalla() {
+        for (JButton boton : botonesGenerados) {
+            panel.remove(boton);
+        }
+        botonesGenerados.clear();
+        panel.repaint();
+    }
+
+    private void mostrarCoordenadas(int x, int y) {
+        JOptionPane.showMessageDialog(panel, "Coordenadas del botón: (" + x + ", " + y + ")");
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Display();
-            }
-        });
+        new Display();
     }
 }
+
