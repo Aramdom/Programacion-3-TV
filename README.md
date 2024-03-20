@@ -1,7 +1,6 @@
 package programaciónIII;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -101,4 +100,5 @@ public class Display extends JFrame {
         new Display();
     }
 }
+
 
