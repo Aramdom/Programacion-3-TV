@@ -1,166 +1,170 @@
 package TECLADO;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import java.awt.Window.Type;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
 
 public class Teclado1 extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+    private static final long serialVersionUID = 1L;
+    private JPanel contentPane;
+    private JButton[] buttons;
+    private Color originalColor;
+    private JTextField textfiel;
+    private JLabel palabraLabel;
+    private JLabel tiempoLabel;
+    private Timer timer;
+    private int tiempoTranscurrido;
+    private String[] palabras = {"casa", "perro", "gato", "computadora", "libro", "sol", "luna"};
+    private int puntaje;
 
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Teclado1 frame = new Teclado1();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+   
+    private final String[] teclas = {
+            "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
+            "A", "S", "D", "F", "G", "H", "J", "K", "L",
+            "Ñ", "Z", "X", "C", "V", "B", "N", "M"
+    };
 
-	
-	public Teclado1() {
-		setType(Type.UTILITY);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 500);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Teclado1 frame = new Teclado1();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
-		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.SOUTH);
-		panel.setLayout(new GridLayout(0, 2, 0, 0));
-		
-		JButton btnNewButton_27 = new JButton("ENTER");
-		btnNewButton_27.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		panel.add(btnNewButton_27);
-		
-		JButton btnR = new JButton("BORRAR");
-		panel.add(btnR);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(128, 255, 0));
-		contentPane.add(panel_1, BorderLayout.NORTH);
-		panel_1.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblNewLabel = new JLabel("Escriba las palabras que vayan apareciendo:");
-		lblNewLabel.setFont(new Font("SimSun", Font.BOLD, 13));
-		panel_1.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Tiempo:                  0");
-		panel_1.add(lblNewLabel_1, BorderLayout.SOUTH);
-		
-		JPanel panel_2 = new JPanel();
-		contentPane.add(panel_2, BorderLayout.CENTER);
-		panel_2.setLayout(new GridLayout(0, 9, 0, 0));
-		
-		JButton btnNewButton_1 = new JButton("Q");
-		panel_2.add(btnNewButton_1);
-		
-		JButton btnNewButton_4 = new JButton("W");
-		panel_2.add(btnNewButton_4);
-		
-		JButton btnNewButton_12 = new JButton("E");
-		panel_2.add(btnNewButton_12);
-		
-		JButton btnNewButton_3 = new JButton("R");
-		panel_2.add(btnNewButton_3);
-		
-		JButton btnNewButton_2 = new JButton("T");
-		panel_2.add(btnNewButton_2);
-		
-		JButton btnNewButton = new JButton("Y");
-		panel_2.add(btnNewButton);
-		
-		JButton btnNewButton_5 = new JButton("U");
-		btnNewButton_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		panel_2.add(btnNewButton_5);
-		
-		JButton btnNewButton_6 = new JButton("I");
-		panel_2.add(btnNewButton_6);
-		
-		JButton btnNewButton_7 = new JButton("O");
-		panel_2.add(btnNewButton_7);
-		
-		JButton btnNewButton_8 = new JButton("P");
-		panel_2.add(btnNewButton_8);
-		
-		JButton btnNewButton_9 = new JButton("A");
-		panel_2.add(btnNewButton_9);
-		
-		JButton btnNewButton_10 = new JButton("S");
-		panel_2.add(btnNewButton_10);
-		
-		JButton btnNewButton_11 = new JButton("D");
-		panel_2.add(btnNewButton_11);
-		
-		JButton btnNewButton_14 = new JButton("F");
-		panel_2.add(btnNewButton_14);
-		
-		JButton btnNewButton_15 = new JButton("G");
-		panel_2.add(btnNewButton_15);
-		
-		JButton btnNewButton_16 = new JButton("H");
-		panel_2.add(btnNewButton_16);
-		
-		JButton btnNewButton_13 = new JButton("J");
-		panel_2.add(btnNewButton_13);
-		
-		JButton btnNewButton_17 = new JButton("K");
-		panel_2.add(btnNewButton_17);
-		
-		JButton btnNewButton_18 = new JButton("L");
-		panel_2.add(btnNewButton_18);
-		
-		JButton btnNewButton_19 = new JButton("Ñ");
-		panel_2.add(btnNewButton_19);
-		
-		JButton btnNewButton_20 = new JButton("Z");
-		panel_2.add(btnNewButton_20);
-		
-		JButton btnNewButton_21 = new JButton("X");
-		panel_2.add(btnNewButton_21);
-		
-		JButton btnNewButton_22 = new JButton("C");
-		panel_2.add(btnNewButton_22);
-		
-		JButton btnNewButton_23 = new JButton("V");
-		panel_2.add(btnNewButton_23);
-		
-		JButton btnNewButton_24 = new JButton("B");
-		panel_2.add(btnNewButton_24);
-		
-		JButton btnNewButton_25 = new JButton("N");
-		panel_2.add(btnNewButton_25);
-		
-		JButton btnNewButton_26 = new JButton("M");
-		panel_2.add(btnNewButton_26);
-	}
+    public Teclado1() {
+        setType(Type.UTILITY);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 600, 500);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
+        setContentPane(contentPane);
+        contentPane.setLayout(new BorderLayout(0, 0));
+
+        JPanel panel = new JPanel();
+        contentPane.add(panel, BorderLayout.SOUTH);
+        panel.setLayout(new GridLayout(0, 3, 0, 0));
+
+        JButton btnNewButton_27 = new JButton("ENTER");
+        btnNewButton_27.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                checkWord();
+            }
+        });
+        panel.add(btnNewButton_27);
+
+        JButton btnR = new JButton("BORRAR");
+        btnR.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String currentText = textfiel.getText();
+                if (!currentText.isEmpty()) {
+                    textfiel.setText(currentText.substring(0, currentText.length() - 1));
+                }
+            }
+        });
+        panel.add(btnR);
+
+        JButton startButton = new JButton("Start");
+        startButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                startGame();
+            }
+        });
+        panel.add(startButton);
+
+        JPanel panel_1 = new JPanel();
+        panel_1.setBackground(new Color(128, 255, 0));
+        contentPane.add(panel_1, BorderLayout.NORTH);
+        panel_1.setLayout(new BorderLayout(0, 0));
+
+        palabraLabel = new JLabel();
+        palabraLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        panel_1.add(palabraLabel, BorderLayout.NORTH);
+
+        tiempoLabel = new JLabel("Tiempo: 0");
+        panel_1.add(tiempoLabel, BorderLayout.SOUTH);
+
+        textfiel = new JTextField();
+        panel_1.add(textfiel, BorderLayout.CENTER);
+
+        JLabel lblNewLabel_2 = new JLabel("Escriba las palabras que aparecen:");
+        panel_1.add(lblNewLabel_2, BorderLayout.WEST);
+
+        JPanel panel_2 = new JPanel();
+        contentPane.add(panel_2, BorderLayout.CENTER);
+        panel_2.setLayout(new GridLayout(3, 9, 0, 0)); 
+
+        buttons = new JButton[27];
+
+        for (int i = 0; i < 27; i++) {
+            buttons[i] = new JButton(teclas[i]); 
+            final int index = i;
+            buttons[i].addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    JButton btn = (JButton) e.getSource();
+                    if (originalColor == null) {
+                        originalColor = btn.getBackground();
+                    } else {
+                        for (JButton button : buttons) {
+                            button.setBackground(originalColor);
+                        }
+                    }
+                    btn.setBackground(getRandomColor());
+                    textfiel.setText(textfiel.getText() + teclas[index]); 
+                }
+            });
+            panel_2.add(buttons[i]);
+            buttons[i].setFocusable(false);
+        }
+
+        tiempoTranscurrido = 0;
+        timer = new Timer(1000, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                tiempoTranscurrido++;
+                tiempoLabel.setText("Tiempo: " + tiempoTranscurrido);
+            }
+        });
+    }
+
+    private Color getRandomColor() {
+        Color[] colores = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.ORANGE, Color.MAGENTA};
+        return colores[(int) (Math.random() * colores.length)];
+    }
+
+    private void startGame() {
+        puntaje = 0;
+        tiempoTranscurrido = 0;
+        timer.start();
+        mostrarSiguientePalabra();
+    }
+
+    private void mostrarSiguientePalabra() {
+        int indiceAleatorio = (int) (Math.random() * palabras.length);
+        palabraLabel.setText(palabras[indiceAleatorio]);
+    }
+
+    private void checkWord() {
+        String palabraIngresada = textfiel.getText();
+        if (esPalabraValida(palabraIngresada)) {
+            puntaje += 10;
+            mostrarSiguientePalabra();
+        }
+    }
+
+    private boolean esPalabraValida(String palabra) {
+        for (String palabraValida : palabras) {
+            if (palabraValida.equalsIgnoreCase(palabra)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
