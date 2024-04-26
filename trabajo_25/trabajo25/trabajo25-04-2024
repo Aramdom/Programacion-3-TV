@@ -1,0 +1,122 @@
+package trabajospp;
+
+
+import java.util.Scanner;
+
+public class main {
+    public static <Gerente> void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Empleado empleado = null;
+        Gerente gerente = null;
+        EmpleadoRegular empleadoRegular = null;
+        boolean salir = false;
+
+        while (!salir) {
+            System.out.println("Menú:");
+            System.out.println("1. Agregar empleado");
+            System.out.println("2. Imprimir datos del empleado");
+            System.out.println("3. Salir");
+            System.out.print("Seleccione una opción: ");
+            int opcion = scanner.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    System.out.println("Ingrese el nombre del empleado:");
+                    String nombre = scanner.next();
+                    System.out.println("Ingrese el salario del empleado:");
+                    float salario = scanner.nextFloat();
+                    System.out.println("¿Es un gerente? (S/N):");
+                    String esGerente = scanner.next();
+
+                    if (esGerente.equalsIgnoreCase("S")) {
+                        System.out.println("Ingrese el departamento del gerente:");
+                        String departamento = scanner.next();
+                        gerente = new Gerente(nombre, salario, departamento);
+                    } else {
+                        empleadoRegular = new EmpleadoRegular(nombre, salario);
+                    }
+
+                    System.out.println("Empleado guardado correctamente.");
+                    break;
+                case 2:
+                    if (empleado != null) {
+                        System.out.println("Datos del empleado:");
+                        System.out.println("Nombre: " + empleado.obtenerNombre());
+                        System.out.println("Salario: " + empleado.obtenerSalario());
+                        if (empleado instanceof trabajospp.Gerente) {
+                            Gerente gerenteImpreso = (Gerente) empleado;
+                            System.out.println("Departamento: " + ((trabajospp.Gerente) gerenteImpreso).obtenerDepartamento());
+                        }
+                    } else {
+                        System.out.println("Primero debe agregar un empleado.");
+                    }
+                    break;
+                case 3:
+                    salir = true;
+                    System.out.println("Saliendo del programa.");
+                    break;
+                default:
+                    System.out.println("Opción inválida. Intente de nuevo.");
+            }
+        }
+
+        scanner.close();
+    }
+}
+//clases
+package trabajospp;
+
+class Gerente extends Empleado {
+    private String departamento;
+
+    public Gerente(String nombre, float salario, String departamento) {
+        super(nombre, salario);
+        this.departamento = departamento;
+    }
+
+    public void establecerDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    public String obtenerDepartamento() {
+        return departamento;
+    }
+}
+
+//clase de gerente
+ackage trabajospp;
+
+
+class Empleado {
+    private String nombre;
+    private float salario;
+
+    public Empleado(String nombre, float salario) {
+        this.nombre = nombre;
+        this.salario = salario;
+    }
+
+    public void establecerNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String obtenerNombre() {
+        return nombre;
+    }
+
+    public void establecerSalario(float salario) {
+        this.salario = salario;
+    }
+
+    public float obtenerSalario() {
+        return salario;
+    }
+}
+// clase de empleado regular
+package trabajospp;
+
+class EmpleadoRegular extends Empleado {
+    public EmpleadoRegular(String nombre, float salario) {
+        super(nombre, salario);
+    }
+}
