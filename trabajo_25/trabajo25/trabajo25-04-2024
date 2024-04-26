@@ -1,14 +1,11 @@
 package trabajospp;
 
-
 import java.util.Scanner;
 
-public class main {
-    public static <Gerente> void main(String[] args) {
+public class Main {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Empleado empleado = null;
-        Gerente gerente = null;
-        EmpleadoRegular empleadoRegular = null;
         boolean salir = false;
 
         while (!salir) {
@@ -31,9 +28,9 @@ public class main {
                     if (esGerente.equalsIgnoreCase("S")) {
                         System.out.println("Ingrese el departamento del gerente:");
                         String departamento = scanner.next();
-                        gerente = new Gerente(nombre, salario, departamento);
+                        empleado = new Gerente(nombre, salario, departamento);
                     } else {
-                        empleadoRegular = new EmpleadoRegular(nombre, salario);
+                        empleado = new EmpleadoRegular(nombre, salario);
                     }
 
                     System.out.println("Empleado guardado correctamente.");
@@ -43,9 +40,9 @@ public class main {
                         System.out.println("Datos del empleado:");
                         System.out.println("Nombre: " + empleado.obtenerNombre());
                         System.out.println("Salario: " + empleado.obtenerSalario());
-                        if (empleado instanceof trabajospp.Gerente) {
-                            Gerente gerenteImpreso = (Gerente) empleado;
-                            System.out.println("Departamento: " + ((trabajospp.Gerente) gerenteImpreso).obtenerDepartamento());
+                        if (empleado instanceof Gerente) {
+                            Gerente gerente = (Gerente) empleado;
+                            System.out.println("Departamento: " + gerente.obtenerDepartamento());
                         }
                     } else {
                         System.out.println("Primero debe agregar un empleado.");
@@ -63,29 +60,10 @@ public class main {
         scanner.close();
     }
 }
-//clases
+
+// Clases
+
 package trabajospp;
-
-class Gerente extends Empleado {
-    private String departamento;
-
-    public Gerente(String nombre, float salario, String departamento) {
-        super(nombre, salario);
-        this.departamento = departamento;
-    }
-
-    public void establecerDepartamento(String departamento) {
-        this.departamento = departamento;
-    }
-
-    public String obtenerDepartamento() {
-        return departamento;
-    }
-}
-
-//clase de gerente
-ackage trabajospp;
-
 
 class Empleado {
     private String nombre;
@@ -96,23 +74,30 @@ class Empleado {
         this.salario = salario;
     }
 
-    public void establecerNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public String obtenerNombre() {
         return nombre;
-    }
-
-    public void establecerSalario(float salario) {
-        this.salario = salario;
     }
 
     public float obtenerSalario() {
         return salario;
     }
 }
-// clase de empleado regular
+
+package trabajospp;
+
+class Gerente extends Empleado {
+    private String departamento;
+
+    public Gerente(String nombre, float salario, String departamento) {
+        super(nombre, salario);
+        this.departamento = departamento;
+    }
+
+    public String obtenerDepartamento() {
+        return departamento;
+    }
+}
+
 package trabajospp;
 
 class EmpleadoRegular extends Empleado {
